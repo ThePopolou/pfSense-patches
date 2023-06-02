@@ -1,0 +1,25 @@
+--- vpn_openvpn_export_ORIG.php	2023-01-20 14:51:55.000000000 +0000
++++ vpn_openvpn_export.php	2023-06-01 19:41:57.000000000 +0100
+@@ -61,9 +61,10 @@
+ 	$vpnid = $server['vpnid'];
+ 	$ras_user = array();
+ 	$ras_certs = array();
+-	if (stripos($server['mode'], "server") === false) {
+-		continue;
+-	}
++	/* if (stripos($server['mode'], "server") === false) {
++	* 	continue;
++	* }
++	*/
+ 	init_config_arr(array('cert'));
+ 	$ecdsagood = array();
+ 	foreach ($config['cert'] as $cert) {
+@@ -101,7 +102,7 @@
+ 				$ras_user[] = $ras_userent;
+ 			}
+ 		}
+-	} elseif (($server['mode'] == "server_tls") ||
++	} elseif (($server['mode'] == "server_tls") || ($server['mode'] == "p2p_tls") ||
+ 			(($server['mode'] == "server_tls_user") && ($server['authmode'] != "Local Database"))) {
+ 		foreach ($a_cert as $cindex => $cert) {
+ 
